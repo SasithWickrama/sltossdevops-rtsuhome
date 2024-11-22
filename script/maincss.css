@@ -1,0 +1,127 @@
+
+/* CSS Document */
+.body1{
+background:url(../Image/bg-main.png)	repeat-x left top #fff;	
+	
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 990px;
+    min-width: 320px;
+    width: 100%;
+	padding-right: 15px;
+    padding-left: 15px;
+}
+
+.top-header {
+	background:url("../Image/bg-wrapper.png");
+	background-repeat:no-repeat;
+	padding-top:0;
+    float: left;
+    position: relative;
+    width: 100%;
+    
+}
+
+
+.header {
+    float: left;
+    position: relative;
+    width: 100%;
+}
+
+
+.heading{
+	color:#0056a9;
+	font-family:Stencil; font-size:40px	;
+}
+
+ul{	
+	list-style-type: none;
+}
+
+.chone{
+	padding:20px;
+	padding-left:0px;
+	text-align:left;
+	list-style-image:url(../Image/map.png);
+}
+
+.chtwo{
+	padding:20px;
+	padding-left:0px;
+	text-align:left;
+	list-style-image:url(../Image/telec.jpg);
+}
+
+.chthree{
+	padding:20px;
+	padding-left:0px;
+	text-align:left;
+	list-style-image:url(../Image/fault.png);
+}
+
+
+.chfour{
+	padding:20px;
+	padding-left:0px;
+	text-align:left;
+	list-style-image:url(../Image/feedback.png);
+}
+
+.chfive{
+	padding:20px;
+	padding-left:0px;
+	text-align:left;
+	list-style-image:url(../Image/map.png);
+}
+
+.chsix{
+	padding:20px;
+	padding-left:0px;
+	text-align:left;
+	list-style-image:url(../Image/citings.png);
+}
+
+.outerbox{ 
+height: 50px;
+width: 100%; 
+color:#0056a9;
+font-family:Stencil; font-size:25px	;
+padding-top:5px;
+padding-bottom:5px;
+padding-left:20px;
+padding-right:20px;
+background-color:#FFF;
+-webkit-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.4); 
+-moz-box-shadow: 0px 1px 6px rgba(23, 69, 88, .5);
+box-shadow:0px 0px 12px rgba(0, 0, 0, 0.4); 
+-webkit-border-radius: 12px;
+-moz-border-radius: 7px; 
+border-radius: 7px;
+text-decoration: none;
+behavior: url(PIE-1.0.0/PIE.htc);
+}
+
+#box {
+   box-shadow: 0 0 5px #666666;
+   -webkit-box-shadow: 0 0 5px #666666;
+   -moz-box-shadow: 0 0 5px #666666;
+}   
+
+
+
+.outerbox:hover {
+	font-size:35px	; 
+}
+
+.im {
+	width:60px;
+	height:60px;
+    position: absolute;
+   
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+

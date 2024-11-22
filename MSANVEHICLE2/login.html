@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Login</title>
+<link rel="shortcut icon" href="title.jpg">
+    <style type="text/css">
+.style1 {
+	width: 300px;
+	height: 64px;
+}
+.style2 {
+	width: 124px;
+}
+.style3 {
+	width: 124px;
+	height: 23px;
+}
+.style4 {
+	height: 23px;
+	width: 207px;
+}
+.style5 {
+	width: 207px;
+}
+.style6 {
+	font-weight: bold;
+}
+.style7 {
+	width: 124px;
+	font-weight: bold;
+}
+.style8 {
+	width: 124px;
+	font-weight: bold;
+	height: 26px;
+}
+.style9 {
+	width: 207px;
+	height: 26px;
+}
+    .style10 {
+	color: #FF0000;
+	font-weight: bold;
+}
+    .style11 {color: #000000}
+    </style>
+	
+	
+<script>
+function checkForm(frm) {
+
+if (frm.txtUsername.value == "" ) {
+         alert("Service ID Required");
+         return false;     
+     }
+	 if (frm.txtPassword.value == "" ) {
+         alert("Password Required");
+         return false;     
+     }
+
+}
+</script>	
+    </head>
+    <body>
+    <form name="form1" method="post" action="auth.php" id="form1" onsubmit="return checkForm(this)">
+     
+      <div align="center"> <img src="sltmain.PNG" width="1238" height="138" /> </div>
+      <div style="text-align: center">
+        <table align="center" class="style1">
+          <tr>
+            <td class="style7"> Service ID :</td>
+            <td class="style5"><input name="txtUsername" type="text" id="txtUsername" class="style6" style="background-color:#FFFFCC;width:152px;text-align: left" /></td>
+          </tr>
+          <tr>
+            <td class="style8"> Password : </td>
+            <td class="style9"><input name="txtPassword" type="password" id="txtPassword" class="style6" style="background-color:#FFFFCC;width:152px;text-align: left" /></td>
+          </tr>
+          <tr>
+            <td class="style2">&nbsp;</td>
+            <td class="style5"><input type="submit" name="btnLogin" value="Login" id="btnLogin" style="font-weight: 700" /></td>
+          </tr>
+          <tr>
+            <td class="style3"></td>
+            <td class="style4"></td>
+          </tr>
+        </table>
+        <p><br />
+          </p>
+        <p><span class="style10"><span class="style11">&copy;</span> IT Solution & Implementation</span></br>  2016. All rights reserved.<br />
+          <br />
+  &nbsp; </p>
+        </div>
+    </form>
+</body>
+</html>

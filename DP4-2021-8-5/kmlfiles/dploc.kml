@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.1"><Document><Style id="dpst1"><IconStyle id="msan"><scale>0.85</scale><Icon><href>../bluestar.png</href></Icon></IconStyle></Style><Style id="dpst2"><IconStyle id="msan"><scale>0.85</scale><Icon><href>../amberstar.png</href></Icon></IconStyle></Style><Style id="dpst3"><IconStyle id="msan"><scale>0.85</scale><Icon><href>../redstar.png</href></Icon></IconStyle></Style><Placemark id="placemark1"><description>&lt;![CDATA[&lt;!DOCTYPE html&gt;&#13;
+&lt;html&gt;&#13;
+&lt;head&gt;&#13;
+&#13;
+&lt;link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"&gt;&#13;
+&#13;
+&lt;/head&gt;&#13;
+&lt;body&gt;&#13;
+&#13;
+&lt;table class="table" style="width:100%" &gt;&#13;
+  &#13;
+  &lt;tr&gt;&#13;
+    &lt;td colspan="2"&gt;&lt;b&gt;PH-MLE-0516-001&lt;/b&gt;&lt;/td&gt;&#13;
+  &lt;/tr&gt;&#13;
+&#13;
+  &lt;tr&gt;&#13;
+    &lt;td&gt;Used Loops :&lt;/td&gt;&#13;
+    &lt;td&gt;8&lt;/td&gt;&#13;
+  &lt;/tr&gt;&#13;
+&#13;
+  &lt;tr&gt;&#13;
+    &lt;td&gt;Free Loops :&lt;/td&gt;&#13;
+    &lt;td&gt;0&lt;/td&gt;&#13;
+  &lt;/tr&gt;&#13;
+&#13;
+&lt;/table&gt;&#13;
+&#13;
+&lt;/body&gt;&#13;
+&lt;/html&gt;</description><styleUrl>#dpst3</styleUrl><Point><coordinates>79.94530063122511,6.720517162998005</coordinates></Point></Placemark></Document></kml>

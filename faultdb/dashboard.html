@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>DevOPS Dashboard</title>
+  <link rel="shortcut icon" href="img/0028_CMO_IconLB_Reports-Dashboard_RGB.png">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="css/mdb.min.css" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="css/style.min.css" rel="stylesheet">
+  
+   <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="js/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="js/mdb.min.js"></script>
+  <!-- Initializations -->
+  <script type="text/javascript">
+    // Animations initialization
+    new WOW().init();
+
+  </script>
+  
+  <!-- jQuery Modal -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
+  
+  <style>
+
+  </style>
+</head>
+
+<body class="grey lighten-3">
+
+  <!--Main Navigation-->
+  <header>
+
+    <!-- Navbar -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+      <div class="container-fluid">
+
+        <!-- Brand -->
+        <a class="navbar-brand waves-effect"  >
+          <strong class="blue-text">Dashboard | SLT Fault</strong>		  
+        </a>
+<p><a href="#ex1" rel="modal:open">Open Modal</a></p>
+        <!-- Collapse -->
+       
+        <!-- Links -->
+ 
+
+      </div>
+    </nav>
+    <!-- Navbar -->
+
+    <!-- Sidebar -->
+
+    <!-- Sidebar -->
+
+  </header>
+  <!--Main Navigation-->
+
+  <!--Main layout-->
+  <main class="pt-5 mx-lg-10">
+    <div class="container-fluid mt-5">
+
+      <!-- Heading -->
+ 
+      <!-- Heading -->
+	  
+	  	  	        <!--Grid row-->
+      <div class="row wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-md-2 mb-2">
+          <!--Card-->
+          <div class="card">
+		  <div class="card-header text-center">
+              MEGALINE (VOICE)
+            </div>
+            <!--Card content-->
+            <div class="card-body">
+              <div id="megaline">
+			  <table  bordercolor="#FFFFFF"; border="2px"; width="100%" >
+					<tr >
+					  <td align="center"><h7>&lt; 1Day</h7></td>
+					  <td bgcolor="#29a329" align="center" width="90px" id="val0v"><h6 id="val0" >0 </h6></td>
+					</tr>
+				  
+					<tr>
+					  <td align="center"><h6> 1Day &lt; 3Day</h6></td>
+					  <td bgcolor="#ffa31a" align="center"; width="90px" id="val1v" class="a"><h6 id="val1" >0 </h6></td>
+					</tr>
+				  
+					<tr>
+					  <td align="center"><h6>&gt; 3Day</h6></td>
+					  <td bgcolor="#C0392B" align="center" width="90px" id="val2v" class="b"><h6  id="val2" style="color:#FFF">0 </h6></td>
+					</tr>
+				</table>
+			  
+			  </div>
+            </div>
+          </div>
+          <!--/.Card-->
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-md-2 mb-2">
+          <!--Card-->
+          <div class="card">
+            <!-- Card header -->
+            <div class="card-header text-center">
+              BROADBAND (COPPER BB)
+            </div>
+            <!--Card content-->
+            <div class="card-body">
+              <div id="BB">
+			  <table  bordercolor="#FFFFFF"; border="2px"; width="100%" >
+					<tr >
+					  <td align="center"><h6>&lt; 1Day</h6></td>
+					  <td bgcolor="#29a329" align="center" width="90px" id="val3v"><h6 id="val3" >0 </h6></td>
+					</tr>
+				  
+					<tr>
+					  <td align="center"><h6> 1Day &lt; 3Day</h6></td>
+					  <td bgcolor="#ffa31a" align="center"; width="90px" id="val4v" class="a"><h6 id="val4" >0 </h6></td>
+					</tr>
+				  
+					<tr>
+					  <td align="center"><h6>&gt; 3Day</h6></td>
+					  <td bgcolor="#C0392B" align="center" width="90px" id="val5v" class="b"><h6  id="val5" style="color:#FFF">0 </h6></td>
+					</tr>
+				</table></div>
+            </div>
+          </div>
+          <!--/.Card-->
+        </div>
+        <!--Grid column-->
+		
+		<!--Grid column-->
+        <div class="col-md-2 mb-4">
+          <!--Card-->
+          <div class="card mb-4">
+            <!-- Card header -->
+            <div class="card-header text-center">
+              PEOTV (COPPER IPTV) 
+            </div>
+            <!--Card content-->
+            <div class="card-body">
+              <div id="IPTV"><table  bordercolor="#FFFFFF"; border="2px"; width="100%" >
+					<tr >
+					  <td align="center"><h6>&lt; 1Day</h6></td>
+					  <td bgcolor="#29a329" align="center" width="90px" id="val6v"><h6 id="val6" >0 </h6></td>
+					</tr>
+				  
+					<tr>
+					  <td align="center"><h6> 1Day &lt; 3Day</h6></td>
+					  <td bgcolor="#ffa31a" align="center"; width="90px" id="val7v" class="a"><h6 id="val7" >0 </h6></td>
+					</tr>
+				  
+					<tr>
+					  <td align="center"><h6>&gt; 3Day</h6></td>
+					  <td bgcolor="#C0392B" align="center" width="90px" id="val8v" class="b"><h6  id="val8" style="color:#FFF">0 </h6></td>
+					</tr>
+				</table></div>
+            </div>
+          </div>
+          <!--/.Card-->
+        </div>
+        <!--Grid column-->
+		
+		<!--Grid column-->
+        <div class="col-md-2 mb-2">
+          <!--Card-->
+          <div class="card mb-4">
+            <!-- Card header -->
+            <div class="card-header text-center">
+              LTE (VOICE,BB)
+            </div>
+            <!--Card content-->
+            <div class="card-body">
+              <div id="LTE"><table  bordercolor="#FFFFFF"; border="2px"; width="100%" >
+					<tr >
+					  <td align="center"><h6>&lt; 1Day</h6></td>
+					  <td bgcolor="#29a329" align="center" width="90px" id="val9v"><h6 id="val9" >0 </h6></td>
+					</tr>
+				  
+					<tr>
+					  <td align="center"><h6> 1Day &lt; 3Day</h6></td>
+					  <td bgcolor="#ffa31a" align="center"; width="90px" id="val10v" class="a"><h6 id="val10" >0 </h6></td>
+					</tr>
+				  
+					<tr>
+					  <td align="center"><h6>&gt; 3Day</h6></td>
+					  <td bgcolor="#C0392B" align="center" width="90px" id="val11v" class="b"><h6  id="val11" style="color:#FFF">0 </h6></td>
+					</tr>
+				</table></div>
+            </div>
+          </div>
+          <!--/.Card-->
+        </div>
+        <!--Grid column-->
+		
+		<div class="col-md-2 mb-2">
+          <!--Card-->
+          <div class="card mb-2">
+            <!-- Card header -->
+            <div class="card-header text-center">
+              FTTH (VOICE,BB,IPTV)
+            </div>
+            <!--Card content-->
+            <div class="card-body">
+              <div id="FTTH"><table  bordercolor="#FFFFFF"; border="2px"; width="100%" >
+					<tr >
+					  <td align="center"><h6>&lt; 1Day</h6></td>
+					  <td bgcolor="#29a329" align="center" width="90px" id="val12v"><h6 id="val12" >0 </h6></td>
+					</tr>
+				  
+					<tr>
+					  <td align="center"><h6> 1Day &lt; 3Day</h6></td>
+					  <td bgcolor="#ffa31a" align="center"; width="90px" id="val13v" class="a"><h6 id="val13" >0 </h6></td>
+					</tr>
+				  
+					<tr>
+					  <td align="center"><h6>&gt; 3Day</h6></td>
+					  <td bgcolor="#C0392B" align="center" width="90px" id="val14v" class="b"><h6  id="val14" style="color:#FFF">0 </h6></td>
+					</tr>
+				</table></div>
+            </div>
+          </div>
+          <!--/.Card-->
+        </div>
+        <!--Grid column-->
+		
+		<div class="col-md-2 mb-2">
+          <!--Card-->
+          <div class="card mb-2">
+            <!-- Card header -->
+            <div class="card-header text-center">
+              DATA
+            </div>
+            <!--Card content-->
+            <div class="card-body">
+              <div id="DATA"><table  bordercolor="#FFFFFF"; border="2px"; width="100%" >
+					<tr >
+					  <td align="center"><h6>&lt; 1Day</h6></td>
+					  <td bgcolor="#29a329" align="center" width="90px" id="val15v"><h6 id="val15" >0 </h6></td>
+					</tr>
+				  
+					<tr>
+					  <td align="center"><h6> 1Day &lt; 3Day</h6></td>
+					  <td bgcolor="#ffa31a" align="center"; width="90px" id="val16v" class="a"><h6 id="val16" >0 </h6></td>
+					</tr>
+				  
+					<tr>
+					  <td align="center"><h6>&gt; 3Day</h6></td>
+					  <td bgcolor="#C0392B" align="center" width="90px" id="val17v" class="b"><h6  id="val17" style="color:#FFF">100 </h6></td>
+					</tr>
+				</table></div>
+            </div>
+          </div>
+          <!--/.Card-->
+        </div>
+        <!--Grid column-->
+
+      </div>
+
+	        <!--Grid row-->
+      <div class="row wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-md-12 mb-4">
+          <!--Card-->
+          <div class="card" >
+		  <div class="card-header text-center">
+              Time wise Pending Faults
+            </div>
+            <!--Card content-->
+            <div class="card-body"style="height: 400px">
+              <canvas id="pendingflts" ></canvas>
+            </div>
+          </div>
+          <!--/.Card-->
+
+        </div>
+        <!--Grid column-->
+
+
+      </div>
+
+      <!--Grid row-->
+      <div class="row wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-md-6 mb-4">
+          <!--Card-->
+          <div class="card">
+		  <div class="card-header text-center">
+              Reported Faults
+            </div>
+            <!--Card content-->
+            <div class="card-body">
+              <canvas id="repfaults"></canvas>
+            </div>
+          </div>
+          <!--/.Card-->
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-md-6 mb-4">
+          <!--Card-->
+          <div class="card mb-4">
+            <!-- Card header -->
+            <div class="card-header text-center">
+              Cleared Faults
+            </div>
+            <!--Card content-->
+            <div class="card-body">
+              <canvas id="clerdfaults"></canvas>
+            </div>
+          </div>
+          <!--/.Card-->
+        </div>
+        <!--Grid column-->
+
+      </div>
+	  
+
+	  
+	        <!--Grid row-->
+      <div class="row wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-md-4 mb-4">
+
+          <!--Card-->
+          <div class="card">
+		  <div class="card-header text-center">
+              Pending Megaline Faults vs Last Falut Cleared Date Summary
+            </div>
+
+            <!--Card content-->
+            <div class="card-body">
+
+              <canvas id="cuflt"></canvas>
+
+            </div>
+
+          </div>
+          <!--/.Card-->
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-md-4 mb-4">
+
+          <!--Card-->
+          <div class="card mb-4">
+
+            <!-- Card header -->
+            <div class="card-header text-center">
+              Pending FTTH Faults vs Last Falut Cleared Date Summary
+            </div>
+
+            <!--Card content-->
+            <div class="card-body">
+
+              <canvas id="ftthflt"></canvas>
+
+            </div>
+
+          </div>
+          <!--/.Card-->
+        </div>
+        <!--Grid column-->
+		
+		<!--Grid column-->
+        <div class="col-md-4 mb-4">
+
+          <!--Card-->
+          <div class="card mb-4">
+
+            <!-- Card header -->
+            <div class="card-header text-center">
+              Pending LTE Faults vs Last Falut Cleared Date Summary
+            </div>
+
+            <!--Card content-->
+            <div class="card-body">
+
+              <canvas id="lteflt"></canvas>
+
+            </div>
+
+          </div>
+          <!--/.Card-->
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+	  	        <!--Grid row-->
+      <div class="row wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-md-12 mb-4">
+          <!--Card-->
+          <div class="card">
+		  <div class="card-header text-center">
+              Repeted Fault Details
+            </div>
+            <!--Card content-->
+            <div class="card-body" >
+			<div class="row">
+			<div class="col-md-8 mb-4">
+              <div id="repetedfaults" style="height:400px;overflow:auto"></div>
+			  </div>
+			  
+			  <div class="col-md-4 mb-4">
+			  <h3 id="numberx"></h3>
+              <canvas id="fltdetails"></canvas>
+			  </div>
+			  </div>
+            </div>
+          </div>
+          <!--/.Card-->
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+	  
+	  
+
+	  
+
+      </div>
+      <!--Grid row-->
+
+
+<div class="modal" id="mymodel" style="height:500px;overflow:auto">
+      <div class="modal-header">
+        <h5 class="modal-heading" align="center"></h5>
+      </div>
+      
+      <div class="modal-body" align="right">
+        <div class="modal-content">
+		<div class="modal-pno" align="center">
+		</div>
+		
+        </div>
+      </div>
+	  <a href="#" rel="modal:close">Close</a>
+  </div>
+	  
+    </div>
+	
+
+  </main>
+  <!--Main layout-->
+
+  <!--Footer-->
+  <footer class="page-footer text-center font-small primary-color-dark darken-2 mt-4 wow fadeIn">
+
+
+    <hr class="my-4">
+
+  
+
+    <!--Copyright-->
+    <div class="footer-copyright py-3">
+      © 2020 Copyright:
+      OSS DevOPS
+    </div>
+    <!--/.Copyright-->
+
+  </footer>
+  <!--/.Footer-->
+
+ 
+
+  <!-- Charts -->
+  <script>
+  window.myPieChart4;
+
+  window.chartColors = {
+	red: 'rgb(255, 99, 132)',
+	orange: 'rgb(255, 159, 64)',
+	yellow: 'rgb(255, 205, 86)',
+	green: 'rgb(75, 192, 192)',
+	blue: 'rgb(54, 162, 235)',
+	purple: 'rgb(153, 102, 255)',
+	grey: 'rgb(201, 203, 207)'
+};
+
+   
+    //pie rgWiseReported
+	$.ajax({
+   type: "POST",
+   url: "./api.php?apicall=repfsummary",
+   success: function(res){
+    var copper = document.getElementById("cuflt").getContext('2d');
+	var ftth = document.getElementById("ftthflt").getContext('2d');
+	var lte = document.getElementById("lteflt").getContext('2d');
+    var myPieChart1 = new Chart(copper, {
+      type: 'pie',
+      data: {
+        labels: res["reply"][0],
+        datasets: [{
+          data: res["reply"][1],
+		  backgroundColor:[window.chartColors.red,window.chartColors.orange,window.chartColors.yellow,window.chartColors.purple,window.chartColors.green]
+         // backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360","#FF6384","#36A2EB","#FFCD56"],
+          //hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774","#FF6384","#36A2EB","#FFCD56"]
+        }]
+      },
+      options: {
+        responsive: true,
+		legend: {
+                display: true,
+                position: 'right'
+				}
+      }
+    });
+	
+	var myPieChart2 = new Chart(ftth, {
+      type: 'pie',
+      data: {
+        labels: res["reply"][0],
+        datasets: [{
+          data: res["reply"][2],
+		  backgroundColor:[window.chartColors.red,window.chartColors.orange,window.chartColors.yellow,window.chartColors.purple,window.chartColors.green]
+         // backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360","#FF6384","#36A2EB","#FFCD56"],
+          //hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774","#FF6384","#36A2EB","#FFCD56"]
+        }]
+      },
+      options: {
+        responsive: true,
+		legend: {
+                display: true,
+                position: 'right'
+				}
+      }
+    });
+	
+	var myPieChart3 = new Chart(lte, {
+      type: 'pie',
+      data: {
+        labels: res["reply"][0],
+        datasets: [{
+          data: res["reply"][3],
+		  backgroundColor:[window.chartColors.red,window.chartColors.orange,window.chartColors.yellow,window.chartColors.purple,window.chartColors.green]
+         // backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360","#FF6384","#36A2EB","#FFCD56"],
+          //hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774","#FF6384","#36A2EB","#FFCD56"]
+        }]
+      },
+      options: {
+        responsive: true,
+		legend: {
+                display: true,
+                position: 'right'
+				}
+      }
+    });
+}
+}); 
+
+/*min chart*/
+
+
+$.ajax({
+   type: "POST",
+   url: "./api.php?apicall=repfaults",
+   success: function(res){
+
+		var ctxL = document.getElementById("repfaults").getContext('2d');
+    var myLineChart = new Chart(ctxL, {
+      type: 'line',
+      data: {
+        labels: res["reply"][0],
+        datasets: [{
+            label: "Total Reported Faults",
+			fill: false,
+            backgroundColor: window.chartColors.red,
+            borderColor:window.chartColors.red,
+            borderWidth: 5,
+            data: res["reply"][1]
+          },
+          {
+            label:"Megaline",
+			fill: false,
+            backgroundColor: window.chartColors.blue,
+            borderColor: window.chartColors.blue,
+            data: res["reply"][2]
+          },
+		  {
+            label: "FTTH",
+			fill: false,
+            backgroundColor: window.chartColors.yellow,
+            borderColor: window.chartColors.yellow,
+            data: res["reply"][3]
+			//,borderDash: [20,10]
+          },
+		  {
+            label: "LTE",
+			fill: false,
+            backgroundColor: window.chartColors.purple,
+            borderColor: window.chartColors.purple,
+            data: res["reply"][4]
+          }
+        ]
+      },
+      options: {
+				responsive: true,
+				tooltips: {
+					mode: 'index',
+					intersect: false,
+				},
+				hover: {
+					mode: 'nearest',
+					intersect: true
+				},
+				scales: {
+					xAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Day'
+						}
+					}],
+					yAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Fault Count'
+						}
+					}]
+				},
+				
+				legend: {
+					labels: {
+						fontSize:10
+						}
+				}
+			}
+    });
+
+}
+}); 
+
+
+$.ajax({
+   type: "POST",
+   url: "./api.php?apicall=clerdfaults",
+   success: function(res){
+
+		var ctxL = document.getElementById("clerdfaults").getContext('2d');
+    var myLineChart = new Chart(ctxL, {
+      type: 'line',
+      data: {
+        labels: res["reply"][0],
+        datasets: [{
+            label: "Total Cleared Faults",
+			fill: false,
+            backgroundColor: window.chartColors.green,
+            borderColor:window.chartColors.green,
+            borderWidth: 5,
+            data: res["reply"][1]
+          },
+          {
+            label:"Megaline",
+			fill: false,
+            backgroundColor: window.chartColors.blue,
+            borderColor: window.chartColors.blue,
+            data: res["reply"][2]
+          },
+		  {
+            label: "FTTH",
+			fill: false,
+            backgroundColor: window.chartColors.yellow,
+            borderColor: window.chartColors.yellow,
+            data: res["reply"][3]
+			//,borderDash: [20,10]
+          },
+		  {
+            label: "LTE",
+			fill: false,
+            backgroundColor: window.chartColors.purple,
+            borderColor: window.chartColors.purple,
+            data: res["reply"][4]
+          }
+        ]
+      },
+      options: {
+				responsive: true,
+				tooltips: {
+					mode: 'index',
+					intersect: false,
+				},
+				hover: {
+					mode: 'nearest',
+					intersect: true
+				},
+				scales: {
+					xAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Day'
+						}
+					}],
+					yAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Fault Count'
+						}
+					}]
+				},
+				
+				legend: {
+					labels: {
+						fontSize:10
+						}
+				}
+			}
+    });
+
+}
+}); 
+
+
+$.ajax({
+   type: "POST",
+   url: "./api.php?apicall=pendingflts",
+   success: function(res){
+
+		var ctxL = document.getElementById("pendingflts").getContext('2d');
+    var myLineChart = new Chart(ctxL, {
+      type: 'line',
+      data: {
+        labels: res["reply"][0],
+        datasets: [{
+            label: "Total Cleared Faults",
+			fill: false,
+            backgroundColor: window.chartColors.orange,
+            borderColor:window.chartColors.orange,
+            borderWidth: 5,
+            data: res["reply"][1]
+          },
+          {
+            label:"Megaline",
+			fill: false,
+            backgroundColor: window.chartColors.blue,
+            borderColor: window.chartColors.blue,
+            data: res["reply"][2]
+          },
+		  {
+            label: "FTTH",
+			fill: false,
+            backgroundColor: window.chartColors.yellow,
+            borderColor: window.chartColors.yellow,
+            data: res["reply"][3]
+			//,borderDash: [20,10]
+          },
+		  {
+            label: "LTE",
+			fill: false,
+            backgroundColor: window.chartColors.purple,
+            borderColor: window.chartColors.purple,
+            data: res["reply"][4]
+          }
+        ]
+      },
+      options: {
+				responsive: true,
+				maintainAspectRatio: false,
+				tooltips: {
+					mode: 'index',
+					intersect: false,
+				},
+				hover: {
+					mode: 'nearest',
+					intersect: true
+				},
+				scales: {
+					xAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Day'
+						}
+					}],
+					yAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Fault Count'
+						}
+					}]
+				},
+				
+				legend: {
+					labels: {
+						fontSize:10
+						}
+				}
+			}
+    });
+
+}
+}); 
+
+
+$.ajax({
+   type: "POST",
+   url: "./api.php?apicall=repetedfaults",
+   success: function(res){
+	if(res != ''){
+		
+	$("#repetedfaults").css("display", "block");
+	$("#repetedfaults").html();
+	$("#repetedfaults").html(res["reply"]);
+		
+	  $("#serchD").on("keyup", function() {
+		var value = $(this).val().toLowerCase();
+		$("#rDatatbl tr").filter(function() {
+		  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		});
+	  });
+	
+	}
+	
+   }
+});
+
+
+$.ajax({
+   type: "POST",
+   url: "./api.php?apicall=pendingbox",
+   success: function(res){
+	if(res != ''){
+		var elements = document.getElementsByClassName('a');
+		for (var i = 0; i < elements.length; i++) {
+			
+			elements[i].bgColor="#ffa31a";
+		}
+		
+		 var elements = document.getElementsByClassName('b');
+		for (var i = 0; i < elements.length; i++) {
+			
+			elements[i].bgColor="#C0392B";
+		}
+		
+		
+				for(var i =0; i<18;i++){
+				   document.getElementById("val"+i).innerHTML = res["reply"][0][i];
+				   if(res["reply"][0][i] == '0'){
+					   document.getElementById("val"+i+"v").bgColor = '#29a329';
+				   }
+					if(res["reply"][0][i] > 0){
+
+						document.getElementById("val"+i+"v").setAttribute("onclick","showprobno("+i+")");
+						
+						//"event.preventDefault();  $('.modal').toggleClass('is-visible');");
+					 
+				   }
+			   }
+		
+	}	
+   }
+});
+
+function viewData(){
+	var id = event.target.id.replace("D", "");	
+   $.ajax({
+	   type: "POST",
+	   url: "./api.php?apicall=repetedfaultsdetails",
+	   data:{id:id},
+	   success: function(res){
+		
+		if(res != ''){	
+		if(window.myPieChart4!= null){
+				myPieChart4.destroy();	}	
+				var fltdetails = document.getElementById("fltdetails").getContext('2d');
+				document.getElementById("numberx").innerHTML = id;
+				window.myPieChart4 = new Chart(fltdetails, {
+				  type: 'pie',
+				  data: {
+					labels: res["reply"][0],
+					datasets: [{
+					  data: res["reply"][1],
+					  backgroundColor:[window.chartColors.red,window.chartColors.orange,window.chartColors.yellow,window.chartColors.purple,window.chartColors.green,,window.chartColors.blue,,window.chartColors.gray]
+					}]
+				  },
+				  options: {
+					responsive: true,
+					legend: {
+							display: true,
+							position: 'right'
+							}
+				  }
+				});
+				
+			}
+			
+		}
+	});
+
+	
+ }
+ 
+ function showprobno(x){ 
+	event.preventDefault(); 
+	var title = "";
+	var type="";
+	var time ="";
+	if(x < 3)	{
+		title ="MEGALINE"; type = "PSTN";
+	}else if(x < 6){
+		title ="BROADBAND"; type = "ADSL";
+	}else if(x < 9){
+		title ="PEOTV"; type = "IPTV";
+	}else if(x < 12){
+		title ="LTE"; type = "LTE";
+	}else if(x < 15){
+		title ="FTTH"; type = "FTTH";
+	}else if(x < 18){
+		title ="DATA"; type = "DATA";
+	}else if(x < 21){
+		title ="CDMA"; type = "CDMA";
+	}
+
+	if( x%3 == 0){
+		title = title+" < 1Day PENDING FAULT NUMBERS"; time ="<1";
+	}
+	if( x%3 == 1){
+		title = title+" 1Day < 3Day PENDING FAULT NUMBERS"; time =" <=3 AND (SYSDATE - PROM_REPORTED)  >=1 ";
+	}
+	if( x%3 == 2){
+		title = title+" > 3Day  PENDING FAULT NUMBERS"; time =">3";
+	}
+	
+	
+ $.ajax({
+   type: "POST",
+   url: "./api.php?apicall=boxfaultsdetails",
+   data:{type:type,time:time},
+   success: function(res){
+	if(res != ''){
+	console.log("zozo");
+	$('.modal-heading').html(title);	
+	$('.modal-pno').html(res["reply"])	; 
+	$('#mymodel').modal();
+	}
+	
+   }
+});
+ }
+ 
+ 	function closemodel(){
+			$('.modal').toggleClass('is-visible');
+	}
+  </script>
+
+  
+</body>
+
+</html>

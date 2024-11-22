@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SLT Customer Satisfaction</title>
+<link rel="stylesheet" href="stylesheet.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+<script src="amcharts/amcharts.js" type="text/javascript"></script>
+<script src="amcharts/serial.js" type="text/javascript"></script>
+<script src="amcharts/themes/dark.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+function loadrtom(){
+	var xmlhttp=new XMLHttpRequest();
+xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+		
+				var resp = xmlhttp.responseText.split("@");
+				 sel = document.getElementById('rt');
+
+for (var i = 0; i<resp.length; i++){
+    var opt = document.createElement('option');
+    opt.value = resp[i];
+    opt.innerHTML = resp[i];
+    sel.appendChild(opt);
+}
+        }
+    }
+    xmlhttp.open("GET","functions.php?q=RTOM",true);
+    xmlhttp.send();
+}
+
+
+
+
+function drawchart(){
+		var slct = document.getElementById('rt');
+		var rtm = slct.options[slct.selectedIndex].value;
+		var xmlhttp=new XMLHttpRequest();
+xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+		var chartData = [];	
+		var tarcum=0;	
+		var achcum=0;	
+		var tempx 	=0;
+		var fcount = 0;
+		var pec =0;
+		
+		
+			var resp = xmlhttp.responseText.split("@");
+				
+			
+				for(var t =0; t<resp.length; t++){
+					var temp = resp[t].split(",");
+					
+					chartData.push({
+						dat: temp[0],
+						ach: temp[1]
+					});
+				}
+				
+				
+			
+ 			chart = new AmCharts.AmSerialChart();
+               chart.dataProvider = chartData;
+               chart.categoryField = "dat";              
+               var categoryAxis = chart.categoryAxis;
+               categoryAxis.axisColor = "#DADADA";
+              
+
+               var graph1 = new AmCharts.AmGraph();
+               graph1.title = "Feedback";
+               graph1.valueField = "ach";
+               graph1.bullet = "round";
+               graph1.hideBulletsCount = 30;
+               graph1.bulletBorderThickness = 1;
+			   graph1.lineColor = '#106882';
+			   graph1.lineThickness = 3;
+               chart.addGraph(graph1);
+				
+				
+			   
+			 
+
+               var chartCursor = new AmCharts.ChartCursor();
+               chartCursor.cursorAlpha = 0.1;
+               chartCursor.fullWidth = true;
+               chart.addChartCursor(chartCursor);
+
+               var legend = new AmCharts.AmLegend();
+               legend.marginLeft = 110;
+               legend.useGraphSettings = true;
+               chart.addLegend(legend);
+
+               chart.write("chart1");	
+            
+				
+      
+            
+        }
+    }
+    xmlhttp.open("GET","functions.php?q=CHART&r="+rtm,true);
+    xmlhttp.send();
+}
+
+
+</script>
+</head>
+
+<body onload="loadrtom()">
+
+<div align="center">
+<h2 style="color:#2E86C1; font-weight:bolder">Customer Satisfaction</h2>
+<table>
+<tr>
+  <td> <h2 style="color:#2E86C1; font-weight:bolder"><small style="color:#3498DB; ">OPMC </small></h2></td>
+  <td style="padding:3em"><select id="rt">
+    </select></td>
+    <td> <button type="button" class="btn btn-success" onClick="drawchart()">Get Infomation</button></td>
+</tr></table>
+<div id="chart1"  style="height:300px;  width:700px; padding-left:10px"></div>
+</div>
+</body>
+</html>

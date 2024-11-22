@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SLT Customer Satisfaction</title>
+<link rel="stylesheet" href="stylesheet.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+<script src="amcharts/amcharts.js" type="text/javascript"></script>
+<script src="amcharts/serial.js" type="text/javascript"></script>
+<script src="amcharts/pie.js" type="text/javascript"></script>
+<script src="amcharts/themes/dark.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+function loadrtom(){
+	var xmlhttp=new XMLHttpRequest();
+xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+		
+				var resp = xmlhttp.responseText.split("@");
+				 sel = document.getElementById('rt');
+
+for (var i = 0; i<resp.length; i++){
+    var opt = document.createElement('option');
+    opt.value = resp[i];
+    opt.innerHTML = resp[i];
+    sel.appendChild(opt);
+}
+
+
+        }
+    }
+    xmlhttp.open("GET","functions.php?q=RTOM",true);
+    xmlhttp.send();
+}
+
+
+
+
+function drawchart(){
+		var slct = document.getElementById('rt');
+		var rtm = slct.options[slct.selectedIndex].value;
+		var xmlhttp=new XMLHttpRequest();
+xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+		var chartData = [];	
+		var chartData1 = [];
+		var cval = ["","4 or 5","","","1 to 3"]	
+		var tarcum=0;	
+		var achcum=0;	
+		var tempx 	=0;
+		var fcount = 0;
+		var pec =0;
+		document.getElementById('table1').style.display = 'none';	
+			document.getElementById('chart1').style.display ='' ;
+			document.getElementById('chart2').style.display = '';
+		
+			var resp = xmlhttp.responseText.split("@");
+				
+			var t1 =0; var t2=0;
+				for(var t =0; t<resp.length; t++){
+					var temp = resp[t].split(",");
+					
+					chartData.push({
+						dat: temp[0],
+						ach: temp[1]
+					});
+					
+					t1 += parseInt(temp[0]);
+					t2 += parseInt(temp[1]);
+					
+					if(t==1 || t==4){
+					
+					chartData1.push({
+						dat: cval[t],
+						ach: t2
+					});
+					
+					t1 = 0;  t2=0;
+					}
+				}
+				
+				
+			
+ 			chart = new AmCharts.AmSerialChart();
+               chart.dataProvider = chartData;
+               chart.categoryField = "dat";  
+			   chart.rotate= true;            
+               var categoryAxis = chart.categoryAxis;
+               categoryAxis.axisColor = "#DADADA";
+              
+
+               var graph1 = new AmCharts.AmGraph();
+               graph1.title = "Feedback Count";
+               graph1.valueField = "ach";
+			   graph1.lineColor = '#106882';
+			   graph1.fillAlphas = 0.8;
+     		   graph1.lineAlpha = 0.2;
+			   graph1.type ="column";			   
+               chart.addGraph(graph1);
+				
+				
+			   
+			 
+
+               var chartCursor = new AmCharts.ChartCursor();
+               chartCursor.cursorAlpha = 0.1;
+               chartCursor.fullWidth = true;
+               chart.addChartCursor(chartCursor);
+
+               var legend = new AmCharts.AmLegend();
+               legend.marginLeft = 110;
+               legend.useGraphSettings = true;
+               chart.addLegend(legend);
+
+               chart.write("chart1");	
+			   
+			   
+			   chart1 = new AmCharts.AmPieChart();
+               chart1.dataProvider = chartData1; 
+			   chart1.type ="pie";	           
+               chart1.valueField = "ach";
+  			 	chart1.titleField =  "dat";
+              	chart1.colors = ["#2DCE2D","#CE632D"];
+
+              
+            chart1.write("chart2");
+			
+      
+            
+        }
+    }
+    xmlhttp.open("GET","functions.php?q=CHART&r="+rtm,true);
+    xmlhttp.send();
+}
+
+
+
+function gettable(){
+	var slct = document.getElementById('rt');
+	var rtm = slct.options[slct.selectedIndex].value;
+	var xmlhttp=new XMLHttpRequest();
+xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+		document.getElementById('chart1').style.display = 'none';
+		document.getElementById('chart2').style.display = 'none';
+		document.getElementById('table1').style.display = '';
+		//alert(xmlhttp.responseText);
+				var resp = xmlhttp.responseText.split("@");
+				 var tbl = "<table class=\"table table-bordered table-inverse\"> <tr><td>FAULT ID</td><td>FEEDBACK</td><td>REPORTED TIME</td><td>CLOSED TIME</td><td>OUTAGE</td><td>CUSTOMER MOBILE</td><td>WORK GROUP</td><td>EMP NAME</td><td>EMP NUMBER</td></tr>";
+				 
+				 for(var t =0; t<resp.length-1; t++){
+					var temp = resp[t].split(",");
+					
+					tbl = tbl+"<tr><td>"+temp[0]+"</td><td>"+temp[1]+"</td><td>"+temp[2]+"</td><td>"+temp[3]+"</td><td>"+temp[4]+"</td><td>"+temp[5]+"</td><td>"+temp[6]+"</td><td>"+temp[7]+"</td><td>"+temp[8]+"</td></tr>";
+				 }
+				 
+				 
+				 tbl = tbl+"</table>";
+				 document.getElementById('table1').innerHTML = tbl;
+				 
+        }
+    }
+    xmlhttp.open("GET","functions.php?q=TABLE&r="+rtm,true);
+    xmlhttp.send();
+}
+
+
+</script>
+</head>
+
+<body onload="loadrtom()">
+
+<div align="center">
+<h2 style="color:#2E86C1; font-weight:bolder">Customer Satisfaction</h2>
+<table>
+<tr>
+  <td> <h2 style="color:#2E86C1; font-weight:bolder"><small style="color:#3498DB; ">OPMC </small></h2></td>
+  <td style="padding:3em"><select id="rt">
+    </select></td>
+    <td> <button type="button" class="btn btn-success" onClick="drawchart()">Get Summary Chart</button></td>
+    <td style="padding:3em"> <button type="button" class="btn btn-success" onClick="gettable()">Get Details</button></td>
+</tr></table>
+
+<div id="table1"  ></div><table><tr><td>
+<div id="chart1"  style="height:300px;  width:600px; padding-left:10px"></div></td><td>
+<div id="chart2"  style="height:500px;  width:600px; padding-left:10px"></div></td></tr></table>
+</div>
+</body>
+</html>

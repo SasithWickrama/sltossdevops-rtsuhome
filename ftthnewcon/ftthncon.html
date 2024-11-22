@@ -1,0 +1,1071 @@
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FTTH NC Quality Check</title>
+<link rel="stylesheet" href="stylesheet.css">
+<link rel="stylesheet" href="bootstrap.min.css">
+<link rel="stylesheet" href="bootstrap-responsive.min.css">
+<link rel="stylesheet" href="jsDatePick_ltr.min.css">
+<link href="bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="bootstrap-toggle.min.js"></script>
+
+<script src="jsDatePick.min.1.3.js"></script>
+<script type="text/javascript">
+
+
+function loadrtom(){
+	var xmlhttp=new XMLHttpRequest();
+xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+		
+				var resp = xmlhttp.responseText.split("@");
+				 sel = document.getElementById('opmcx');
+
+for (var i = 0; i<resp.length-1; i++){
+    var opt = document.createElement('option');
+    opt.value = resp[i];
+    opt.innerHTML = resp[i];
+    sel.appendChild(opt);
+}
+ var opt = document.createElement('option');
+    opt.value = 'ALL';
+    opt.innerHTML = 'ALL';
+    sel.appendChild(opt);
+
+        }
+    }
+    xmlhttp.open("GET","functions.php?q=OPMCx",true);
+    xmlhttp.send();
+}
+
+function loadcon(){
+	var xmlhttp1 =new XMLHttpRequest();
+xmlhttp1.onreadystatechange=function() {
+    if (xmlhttp1.readyState==4 && xmlhttp1.status==200) {
+		
+				var resp = xmlhttp1.responseText.split("@");
+				 sel = document.getElementById('conname');
+
+for (var i = 0; i<resp.length-1; i++){
+    var opt = document.createElement('option');
+    opt.value = resp[i];
+    opt.innerHTML = resp[i];
+    sel.appendChild(opt);
+}
+ var opt = document.createElement('option');
+    opt.value = 'ALL';
+    opt.innerHTML = 'ALL';
+    sel.appendChild(opt);
+
+        }
+    }
+    xmlhttp1.open("GET","functions.php?q=CON",true);
+    xmlhttp1.send();
+}
+
+
+function loadsummary(){
+	var xmlhttp2 =new XMLHttpRequest();
+xmlhttp2.onreadystatechange=function() {
+    if (xmlhttp2.readyState==4 && xmlhttp2.status==200) {
+		
+				var resp = xmlhttp2.responseText;
+console.log(resp);
+				 $("#summary").html(resp);
+
+        }
+    }
+    xmlhttp2.open("GET","functions.php?q=SUMMARY",true);
+    xmlhttp2.send();
+}
+
+
+function enablesummary(){
+loadsummary();
+	document.getElementById('modelselect').style.display='block';
+	document.getElementById('modelselect').disabled = false;
+}
+
+
+
+
+
+                window.onload = function(){
+                                new JsDatePick({
+                                                useMode:2,
+                                                target:"inputField1",
+                                                dateFormat:"%m/%d/%Y"
+                                });
+								
+								new JsDatePick({
+                                                useMode:2,
+                                                target:"inputField1x",
+                                                dateFormat:"%m/%d/%Y"
+                                });
+								
+								new JsDatePick({
+                                                useMode:2,
+                                                target:"inputField3",
+                                                dateFormat:"%m/%d/%Y"
+                                });
+								
+								new JsDatePick({
+                                                useMode:2,
+                                                target:"inputField1a",
+                                                dateFormat:"%m/%d/%Y"
+                                });
+								
+								new JsDatePick({
+                                                useMode:2,
+                                                target:"inputField2a",
+                                                dateFormat:"%m/%d/%Y"
+                                });
+				
+								
+                };
+				loadrtom();
+				loadcon();
+				
+				
+/*
+function loadrtom(){
+	var xmlhttp=new XMLHttpRequest();
+xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+		
+				var resp = xmlhttp.responseText.split("@");
+				 sel = document.getElementById('rt');
+
+for (var i = 0; i<resp.length-1; i++){
+    var opt = document.createElement('option');
+    opt.value = resp[i];
+    opt.innerHTML = resp[i];
+    sel.appendChild(opt);
+}
+ var opt = document.createElement('option');
+    opt.value = 'ALL';
+    opt.innerHTML = 'ALL';
+    sel.appendChild(opt);
+
+        }
+    }
+    xmlhttp.open("GET","functions.php?q=RTOM",true);
+    xmlhttp.send();
+}
+*/
+
+function loadvalues(varid ){
+	var fillitem = document.getElementById(varid);
+	var selectval = fillitem.options[fillitem.selectedIndex].value.replace('&','*');
+	
+	var nextid;
+	var preval;
+	show(varid);
+	
+	if(varid == 'region'){ 
+		show('province');
+		hide('rtom');
+		hide('lea');
+		hide('opmc');
+		nextid = 'province';	
+	}
+	
+	if(varid == 'province'){ 
+		show('rtom');
+		hide('lea');
+		show('opmc');
+		nextid = 'rtom';	
+		preval = document.getElementById('region').options[document.getElementById('region').selectedIndex].value;		
+	}
+	
+	if(varid == 'rtom'){ 
+		//show('lea');
+		hide('opmc');	
+		nextid = 'lea';	
+		preval = document.getElementById('province').options[document.getElementById('province').selectedIndex].value.replace('&','*');	
+	}
+	
+	if(varid == "opmc"){ 
+		hide("rtom");
+		//show("lea");	
+		nextid = "lea";	
+		preval = document.getElementById('province').options[document.getElementById('province').selectedIndex].value.replace('&','*');
+	}
+	
+	if(varid == "lea"){ 	
+		nextid = "user";
+		var opmcx = document.getElementById('opmc').options[document.getElementById('opmc').selectedIndex].value.replace('&','*');			
+		var rtomx = document.getElementById('rtom').options[document.getElementById('rtom').selectedIndex].value.replace('&','*');	
+		return;		
+	}
+	
+	if(selectval == ''){
+		return;
+	}
+	
+	sel = document.getElementById(nextid);
+					 var length = sel.options.length;
+for (var i = 0; i < length; i++) {
+  sel.options[i] = null;
+}
+
+sel.options.length = 0;
+	
+	var xmlhttp=new XMLHttpRequest();
+	xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {	
+				var resp = xmlhttp.responseText.split("@");
+				 sel = document.getElementById(nextid);
+				 
+				  var opt = document.createElement('option');
+    opt.value = '';
+    opt.innerHTML = '';
+    sel.appendChild(opt);
+
+for (var i = 0; i<resp.length-1; i++){
+    var opt = document.createElement('option');
+    opt.value = resp[i].replace('&','*');
+    opt.innerHTML = resp[i];
+    sel.appendChild(opt);
+}
+
+        }
+    }
+    xmlhttp.open("GET","functions.php?q="+varid+"&r="+selectval+"&s="+preval,true);
+    xmlhttp.send();
+	
+	
+	if(varid == 'province'){
+		nextidx = 'opmc';
+		varid = 'province2';
+		selx = document.getElementById(nextidx);
+					 var length = selx.options.length;
+for (var i = 0; i < length; i++) {
+  selx.options[i] = null;
+}
+
+selx.options.length = 0;
+	
+	var xmlhttpx=new XMLHttpRequest();
+xmlhttpx.onreadystatechange=function() {
+    if (xmlhttpx.readyState==4 && xmlhttpx.status==200) {	
+				var respx = xmlhttpx.responseText.split("@");
+				 selx = document.getElementById(nextidx);
+				 
+				  var optx = document.createElement('option');
+    optx.value = '';
+    optx.innerHTML = '';
+    selx.appendChild(optx);
+
+for (var i = 0; i<respx.length-1; i++){
+    var optx = document.createElement('option');
+    optx.value = respx[i];
+    optx.innerHTML = respx[i];
+    selx.appendChild(optx);
+}
+
+
+        }
+    }
+    xmlhttpx.open("GET","functions.php?q="+varid+"&r="+selectval+"&s="+preval,true);
+    xmlhttpx.send();
+	}
+}
+
+
+
+
+function hide(varid){
+	document.getElementById(varid).style.visibility = 'hidden';
+	document.getElementById(varid+"x").style.visibility = 'hidden';
+}
+
+
+function show(varid){
+	document.getElementById(varid).style.visibility = 'visible';
+	document.getElementById(varid+"x").style.visibility = 'visible';
+}
+
+
+
+function getleaval(){
+	var statment= null;
+	 var reg =document.getElementById('region').options[document.getElementById('region').selectedIndex].value;
+	 if(reg ==''){
+		 alert("Atlese Select Region to get Data")
+	 }if(reg =='ALL'){
+		 statement = ")";
+		 return statement;
+	 }else{
+		 statement = "WHERE REGIONS = '"+reg+"')";
+	 }
+	 
+	 
+	  var prov =document.getElementById('province').options[document.getElementById('province').selectedIndex].value;
+	 if(prov ==''){
+		return statement;
+	 }if(prov =='ALL'){
+		// return statement;
+	 }else{
+		 statement = "WHERE PROVINCE = '"+prov+"')";
+	 }
+	 
+	 
+	 var rtom =document.getElementById('rtom').options[document.getElementById('rtom').selectedIndex].value;
+	  var opmc =document.getElementById('opmc').options[document.getElementById('opmc').selectedIndex].value;
+	
+	 if(rtom =='' && opmc ==''){
+		return statement;		
+	 }
+	 if(rtom !=''){
+	 if(rtom =='ALL'){
+		// return statement;
+	 }else{
+		 statement = "WHERE RTOM_CODE = '"+rtom+"')";
+	 }
+	 }
+	 
+	 
+	 if(rtom =='' && opmc ==''){
+		return statement;		
+	 }
+	 if(opmc !=''){
+		 if(opmc =='ALL'){
+		// return statement;
+	 }else{
+		 statement = "WHERE OPMC_NAME = '"+opmc+"')";
+	 }
+	 }
+	 
+	 
+	  var lea =document.getElementById('lea').options[document.getElementById('lea').selectedIndex].value;
+	 if(lea ==''){
+		return statement;
+	 }if(lea =='ALL'){
+		// return statement;
+	 }else{
+		 statement = "WHERE LEA_CODE = '"+lea+"')";
+	 }
+	 
+	 
+	 
+	 return statement;
+	 
+}
+
+
+function gettable(){
+	var fdate = document.getElementById('inputField1x').value;
+	var tdate = document.getElementById('inputField3').value;
+	
+	if(fdate=='' || tdate==''){
+		alert("Plese Select Date ");
+		return;
+	}   
+   
+	
+	document.getElementById('table1').innerHTML = "<br/><br/><div class=\"loader\"></div>";
+	var rtm = getleaval().replace('&','*');
+	
+	console.log(rtm);
+	
+	if(rtm ==''){document.getElementById('table1').innerHTML = "";}
+	
+	var xmlhttp=new XMLHttpRequest();
+xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+		
+		console.log(xmlhttp.responseText);
+		document.getElementById('table1').style.display = '';
+		
+				var resp = xmlhttp.responseText.split("@");
+				
+					var tbl = "<table class=\"table table-bordered table-inverse\" > <tr bgcolor=\"#2E86C1\"><td>OPMC</td><td>COUNT</td></tr>";
+				 
+				 for(var t =0; t<resp.length-1; t++){
+					var temp = resp[t].split(",");
+					
+					tbl = tbl+"<tr><td>"+temp[0]+"</td><td>"+temp[1]+"</td></td>";
+					
+					
+					
+				 }
+				
+				 tbl = tbl+"</table>";
+				 document.getElementById('table1').innerHTML = tbl;
+				 
+        }
+    }
+    xmlhttp.open("GET","functions.php?q=TABLE&r="+rtm+"&s="+fdate+"&t="+tdate,true);
+    xmlhttp.send();
+}
+
+
+
+function getalldata(){
+
+	var fdate = document.getElementById('inputField1a').value;
+	var tdate = document.getElementById('inputField2a').value;
+	
+	if(fdate=='' || tdate==''){
+		alert("Plese Select Date ");
+		return;
+	}   
+   
+	
+	document.getElementById('table2').innerHTML = "<br/><br/><div class=\"loader\"></div>";
+	
+	//console.log("functions.php?q=alldata&s="+fdate+"&t="+tdate);
+
+	
+	var xmlhttp=new XMLHttpRequest();
+xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+		
+		//console.log(xmlhttp.responseText);
+		document.getElementById('table2').style.display = '';
+		
+				var resp = xmlhttp.responseText.split("@");
+				
+					var tbl = "<table border='2px'><tr bgcolor='#87AFC6'>					<td>INSPECTION_DATE</td><td>CIRCUIT_NO</td><td>OPMC</td><td>FTC</td><td>FDP</td><td>FDP_PORT</td><td>INSPECTOR</td><td>CONTRACTOR</td><td>CON_CONTACTNO</td><td>CUS_NAME</td><td>CUS_ADDRESS</td><td>CUS_CONTACTNO</td><td>BB_SPEED_WIRED</td><td>BB_SPEED_WIFI</td><td>BB_WIFI_CH</td><td>	BB_OPT_PWR_FDP</td><td>BB_OPT_PWR_ROS</td><td>BB_LOSS</td><td>IPTV_IP</td><td>IPTV_OPT_PWR_ONT</td><td>ONT_TYPE</td><td>OH_CONSTRUCTION	</td><td>WORK_CON_TEAM</td><td>AFTER_SALE_SV</td><td>INSPEC_SUG</td><td>INSPEC_DIF</td><td>SUPERVISER</td><td>SEGMENT</td><td>CHECK_LIST</td><td>COMPLIANCE	</td><td>DEVIATION</td><td>DEVIATION_JUST</td><td>OTHER_COMP</td><td>EVIDENCE_REF</td><td>FEEDBACK</td></tr>";
+				 
+				 for(var t =0; t<resp.length-1; t++){
+					var temp = resp[t].split(",");
+					
+					tbl = tbl+"<tr><td>"+temp[0]+"</td><td>"+temp[1]+"</td><td>"+temp[2]+"</td><td>"+temp[3]+"</td><td>"+temp[4]+"</td><td>"+temp[5]+
+					"</td><td>"+temp[6]+"</td><td>"+temp[7]+"</td><td>"+temp[8]+"</td><td>"+temp[9]+"</td><td>"+temp[10]+"</td><td>"+temp[11]+"</td><td>"+temp[12]+
+					"</td><td>"+temp[13]+"</td><td>"+temp[14]+"</td><td>"+temp[15]+"</td><td>"+temp[16]+"</td><td>"+temp[17]+"</td><td>"+temp[18]+"</td><td>"+temp[19]+
+					"</td><td>"+temp[20]+"</td><td>"+temp[21]+"</td><td>"+temp[22]+"</td><td>"+temp[23]+"</td><td>"+temp[24]+"</td><td>"+temp[25]+"</td><td>"+temp[26]+
+					"</td><td>"+temp[27]+"</td><td>"+temp[28]+"</td><td>"+temp[29]+"</td><td>"+temp[30]+"</td><td>"+temp[31]+"</td><td>"+temp[32]+"</td><td>"+temp[33]+
+					"</td><td>"+temp[34]+"</td></tr>";
+					
+					
+					
+				 }
+				
+				 tbl = tbl+"</table>";
+				 document.getElementById('table2').innerHTML = tbl;
+				 var ua = window.navigator.userAgent;
+    var msie = ua.indexOf("MSIE "); 
+
+    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+    {
+        txtArea1.document.open("txt/html","replace");
+        txtArea1.document.write(tbl);
+        txtArea1.document.close();
+        txtArea1.focus(); 
+        sa=txtArea1.document.execCommand("SaveAs",true,"Say Thanks to Sumit.xls");
+    }  
+    else                 //other browser not tested on IE 11
+        sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tbl));  
+
+    return (sa);
+				 
+        }
+    }
+    xmlhttp.open("GET","functions.php?q=alldata&s="+fdate+"&t="+tdate,true);
+    xmlhttp.send();
+
+}
+
+
+
+
+</script>
+</head>
+
+<body >
+
+
+
+   <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+      <ul id="myTab" class="nav nav-tabs nav-tabs-responsive" role="tablist">
+        
+        <li role="presentation"  class="active">
+          <a href="#pstn" role="tab" id="pstn-tab" data-toggle="tab" aria-controls="pstn">
+            <span class="text">FTTH Quality Form</span>
+          </a>
+        </li>
+        <li role="presentation" class="next">
+          <a href="#bb" role="tab" id="bb-tab" data-toggle="tab" aria-controls="bb">
+            <span class="text">Summary</span>
+          </a>
+        </li>
+		<li role="presentation" >
+          <a href="#Peotv" id="Peotv-tab" role="tab" data-toggle="tab" aria-controls="Peotv" aria-expanded="true">
+            <span class="text">Reports</span>
+          </a>
+        </li>
+		
+      </ul>
+      <div id="myTabContent" class="tab-content">       
+        <div role="tabpanel" class="tab-pane fade in active" id="pstn" aria-labelledby="pstn-tab">
+     
+       
+	
+	
+	
+	<!--<button id="sumbtn"  type="button" class="btn btn-warning" onClick="enablesummary()" data-toggle="modal" data-target="#myModal">Get RTOM Summary</button>-->
+<div align="center"; style="background-color:#40576F">
+  <h2 style="color:#F0F3F4  ; font-weight:bolder">Quality Inspection for FTTH New Connection</h2>
+  <h4 style="color:#F0F3F4  ;">(FDP Customer Premises Equipment)</h4>
+  <h5 style="color:#F0F3F4  ;">Document Number : QUAD FFI 036</h5>
+</div>
+<div align="center"; > <br/>
+<form id="form1" action="formaction.php" method="post" onSubmit="return confirm('Are you sure you wish to Save?');">
+  <table style="color:#40576F; ">
+    <tr style="padding:0" >
+      <td>Date of inspection</td>
+      <td style="padding-right:55px;"><input type="text" name="inputField1" class="inputx"  id="inputField1"     /></td>
+      <td>Name of inspectors visited</td>
+      <td><input type="text" name="name" class="inputx"  id="name"     /></td>
+    </tr>
+    <tr >
+      <td>Telephone/Circuit No:</td>
+      <td><input type="text" name="tpno" class="inputx"  id="tpno"     /></td>
+      <td>Contractor Name:</td>
+      <td><select id="conname" name ="conname" >
+          <option value=""></option>
+        </select></td>
+    </tr>
+    <tr >
+      <td >OPMC Area:</td>
+      <td><select id="opmcx" name ="opmc" >
+          <option value=""></option>
+        </select></td>
+      <td>Contractor Contact No:</td>
+      <td><input type="text" name="contp" class="inputx"  id="contp"  /></td>
+    </tr>
+    <tr >
+      <td>FTC (Code):</td>
+      <td><input type="text" name="ftc" class="inputx"  id="ftc"  /></td>
+      <td>Customer Name:</td>
+      <td><input type="text" name="cusname" class="inputx"  id="cusname"  /></td>
+    </tr>
+    <tr>
+      <td >FDP (Code):</td>
+      <td><input type="text" name="fdp" class="inputx"  id="fdp"  /></td>
+      <td>Customer Address:</td>
+      <td><input type="text" name="address" class="inputx"  id="address"  /></td>
+    </tr>
+    <tr>
+      <td>FDP Port:</td>
+      <td><input type="text" name="fport" class="inputx"  id="fport"  /></td>
+      <td>Customer Contact No:</td>
+      <td><input type="text" name="custp" class="inputx"  id="custp"  /></td>
+      </tr>
+  </table>
+  <br/>
+  <table border="1" bordercolor="#40576F" style="color:#40576F; font-size:13px ">
+    <tr style="padding:0" align="center"  >
+      <td >Segment</td>
+      <td >S/N</td>
+      <td >Check Item</td>
+      <td >Compliance (yes/No)</td>
+      <td >If no, what is the deviation with the standard</td>
+      <td >Any justification for the deviation (as observed)</td>
+      <td >Other complaint/queries/concerns&nbsp; of the customer</td>
+      <td width="152px">Reference for Evidence provided (photo no, other documents etc)</td>
+      <td >Your feedback/answers given to the customer</td>
+    </tr>
+    <tr align="center">
+      <td rowspan=4 width="150px" >Appearance and behavior of contractor team</td>
+      <td >1</td>
+      <td align="left" style="padding:5px"  width="152px">Visiting customer premises in given appointment time</td>
+      <td align="left" style="padding:5px"><input type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger" id="tog1" name="tog1"></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="a1" name="a1"></textarea></td>
+      <td align="left"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="b1" name="b2"></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="c1" name="c1"></textarea></td>
+      <td align="left" width="152px"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="d1" name="d1"></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="e1"></textarea></td>
+    </tr>
+    <tr style="padding:0" align="center">
+      <td >2</td>
+      <td align="left" style="padding:5px" width="152px">Wearing company uniform</td>
+      <td align="left" style="padding:5px"><input type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger" id="tog2" name="tog2"></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="a2" name="a2"></textarea></td>
+      <td align="left"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="b2" name="b2"></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="c2" name="c2"></textarea></td>
+      <td align="left" width="152px"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="d2" name="d2"></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="e2" name="e2"></textarea></td>
+    </tr>
+    <tr style="padding:0" align="center" >
+      <td >3</td>
+      <td align="left" style="padding:5px" width="152px">Wearing Company Identity Card</td>
+      <td align="left" style="padding:5px"><input type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger" id="tog3"  name="tog3"></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="a3" name="a3"></textarea></td>
+      <td align="left"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="b3" name="b3"></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="c3" name="c3" ></textarea></td>
+      <td align="left" width="152px"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="d3"
+      name="d3"></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="e3" name="e3"></textarea></td>
+    </tr>
+    <tr style="padding:0" align="center">
+      <td >4</td>
+      <td align="left"  style="padding:5px" width="152px">Friendly service to the customer</td>
+      <td align="left" style="padding:5px"><input type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger" id="tog4" name="tog4"></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="a4" name="a4"></textarea></td>
+      <td align="left"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="b4" name="b4"></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="c4" name="c4"></textarea></td>
+      <td align="left" width="152px"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="d4" name="d4"></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="e4" name="e4"></textarea></td>
+    </tr>
+    <tr style="padding:0" align="center">
+      <td rowspan=3  width="150px">Neatness of the work</td>
+      <td >5</td>
+      <td align="left" style="padding:5px" width="152px">Cleaning the FDP and relevant adaptor before terminate the fiber drop wire</td>
+      <td align="left" style="padding:5px"><input type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger" id="tog5" name="tog5"></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="a5" name="a5"></textarea></td>
+      <td align="left"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="b5" name="b5" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="c5" name="c5" ></textarea></td>
+      <td align="left" width="152px"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="d5" name="d5" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="e5" name="e5" ></textarea></td>
+    </tr>
+    <tr style="padding:0" align="center" >
+      <td >6</td>
+      <td  align="left" style="padding:5px" width="152px">Neatness of the wiring inside the house according to the
+        customer awareness/agreement and compliance to the SLT provided guideline</td>
+      <td align="left" style="padding:5px"><input type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger" id="tog6" name="tog6"></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="a6" name="a6" ></textarea></td>
+      <td align="left"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="b6" name="b6" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="c6" name="c6" ></textarea></td>
+      <td align="left" width="152px"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="d6" name="d6" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="e6" name="e6" ></textarea></td>
+    </tr>
+    <tr style="padding:0" align="center">
+      <td >7</td>
+      <td  align="left" style="padding:5px" width="152px">Cleaning site properly after completion of installations</td>
+      <td align="left" style="padding:5px"><input type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger" id="tog7"  name="tog7"></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="a7" name="a7" ></textarea></td>
+      <td align="left"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="b7" name="b7" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="c7" name="c7" ></textarea></td>
+      <td align="left" width="152px"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="d7" name="d7" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="e7" name="e7" ></textarea></td>
+    </tr>
+    <tr style="padding:0" align="center" >
+      <td rowspan=4  width="150px">FAC installation</td>
+      <td >8</td>
+      <td  align="left" style="padding:5px" width="152px">Using SLT standardized FAC<span
+  style='mso-spacerun:yes'> </span></td>
+      <td align="left" style="padding:5px"><input type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger" id="tog8" name="tog8"></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="a8" name="a8" ></textarea></td>
+      <td align="left"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="b8" name="b8" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="c8" name="c8" ></textarea></td>
+      <td align="left" width="152px"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="d8" name="d8" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="e8" name="e8" ></textarea></td>
+    </tr>
+    <tr style="padding:0" align="center">
+      <td >9</td>
+      <td align="left" style="padding:5px" width="152px">Using proper tools for each tasks</td>
+      <td align="left" style="padding:5px"><input type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger" id="tog9" name="tog9"></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="a9" name="a9" ></textarea></td>
+      <td align="left"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="b9" name="b9" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="c9" name="c9" ></textarea></td>
+      <td align="left" width="152px"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="d9" name="d9" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="e9" name="e9" ></textarea></td>
+    </tr>
+    <tr style="padding:0" align="center">
+      <td >10</td>
+      <td  align="left" style="padding:5px" width="152px">Using Acetone fluid or surgical sprit and gauze or baby tissues
+        for cleaning</td>
+      <td align="left" style="padding:5px"><input type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger" id="tog10" name="tog10"></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="a10" name="a10" ></textarea></td>
+      <td align="left"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="b10" name="b10" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="c10" name="c10" ></textarea></td>
+      <td align="left" width="152px"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="d10" name="d10" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="e10" name="e10" ></textarea></td>
+    </tr>
+    <tr style="padding:0" align="center">
+      <td  align="left" >11</td>
+      <td align="left" style="padding:5px" width="152px">Ability to install the FAC perfectly at the first attempt</td>
+      <td align="left" style="padding:5px"><input type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger" id="tog11" name="tog11"></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="a11" name="a11" ></textarea></td>
+      <td align="left"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="b11" name="b11" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="c11" name="c11" ></textarea></td>
+      <td align="left" width="152px"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="d11" name="d11" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="e11" name="e11" ></textarea></td>
+    </tr>
+    <tr style="padding:0" align="center">
+      <td rowspan=2  width="150px">Confirming the completion of work</td>
+      <td  align="left" >12</td>
+      <td align="left" style="padding:5px" width="152px">Using proper equipment to test the connection (VFL, Power Meter)</td>
+      <td align="left" style="padding:5px"><input type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger" id="tog12" name="tog12"></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="a12" name="a12" ></textarea></td>
+      <td align="left"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="b12" name="b12" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="c12" name="c12" ></textarea></td>
+      <td align="left" width="152px"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="d12" name="d12" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="e12" name="e12" ></textarea></td>
+    </tr>
+    <tr style="padding:0" align="center">
+      <td >13</td>
+      <td  align="left" style="padding:5px" width="152px">Checking the all services are working properly and confirming to customer (Internet on both Ethernet and Wi-Fi and their speeds, PEO TV, and
+        Voice)</td>
+      <td align="left" style="padding:5px"><input type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger" id="tog13" name="tog13"></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="a13" name="a13" ></textarea></td>
+      <td align="left"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="b13" name="b13" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="c13" name="c13" ></textarea></td>
+      <td align="left" width="152px"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="d13" name="d13" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="e13" name="e13" ></textarea></td>
+    </tr>
+    <tr style="padding:0" align="center">
+      <td rowspan=11  width="150px">Contractor team adherence to the SLT provided
+        guidelines for FTTH new connection installation</td>
+      <td >14</td>
+      <td align="left" style="padding:5px" width="152px">Keeping FTTH guidelines booklet with the team</td>
+      <td align="left" style="padding:5px"><input type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger" id="tog14" name="tog14"></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="a14" name="a14" ></textarea></td>
+      <td align="left"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="b14" name="b14" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="c14" name="c14" ></textarea></td>
+      <td align="left" width="152px"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="d14" name="d14" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="e14" name="e14" ></textarea></td>
+    </tr>
+    <tr style="padding:0" align="center" >
+      <td >15</td>
+      <td align="left" style="padding:5px" width="152px">Terminating Into FDP</td>
+      <td align="left" style="padding:5px"><input type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger" id="tog15" name="tog15"></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="a15" name="a15" ></textarea></td>
+      <td align="left"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="b15" name="b15" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="c15" name="c15" ></textarea></td>
+      <td align="left" width="152px"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="d15" name="d15" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="e15" name="e15" ></textarea></td>
+    </tr>
+    <tr style="padding:0" align="center" >
+      <td >16</td>
+      <td align="left" style="padding:5px" width="152px">Drop Wire
+        Drawing</td>
+      <td align="left" style="padding:5px"><input type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger" id="tog16" name="tog16"></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="a16" name="a16" ></textarea></td>
+      <td align="left"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="b16" name="b16" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="c16" name="c16" ></textarea></td>
+      <td align="left" width="152px"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="d16" name="d16" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="e16" name="e16" ></textarea></td>
+    </tr>
+    <tr style="padding:0" align="center" >
+      <td height=17 >17</td>
+      <td align="left" style="padding:5px" width="152px">Erecting Poles</td>
+      <td align="left" style="padding:5px"><input type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger" id="tog17" name="tog17"></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="a17" name="a17" ></textarea></td>
+      <td align="left"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="b17" name="b17" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="c17" name="c17" ></textarea></td>
+      <td align="left" width="152px"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="d17" name="d17" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="e17" name="e17" ></textarea></td>
+    </tr>
+    <tr style="padding:0" align="center">
+      <td>18</td>
+      <td align="left" style="padding:5px" width="152px">Demarcation Box
+        Placing</td>
+      <td align="left" style="padding:5px"><input type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger" id="tog18" name="tog18"></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="a18" name="a18" ></textarea></td>
+      <td align="left"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="b18" name="b18" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="c18" name="c18" ></textarea></td>
+      <td align="left" width="152px"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="d18" name="d18" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="e18" name="e18" ></textarea></td>
+    </tr>
+    <tr style="padding:0" align="center">
+      <td >19</td>
+      <td align="left" style="padding:5px" width="152px">Internal Wire</td>
+      <td align="left" style="padding:5px"><input type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger" id="tog19" name="tog19"></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="a19" name="a19" ></textarea></td>
+      <td align="left"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="b19" name="b19" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="c19" name="c19" ></textarea></td>
+      <td align="left" width="152px"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="d19" name="d19" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="e19" name="e19" ></textarea></td>
+    </tr>
+    <tr style="padding:0" align="center">
+      <td >20</td>
+      <td align="left" style="padding:5px" width="152px">Rosette Box
+        Placing</td>
+      <td align="left" style="padding:5px"><input type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger" id="tog20" name="tog20"></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="a20" name="a20" ></textarea></td>
+      <td align="left"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="b20" name="b20" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="c20" name="c20" ></textarea></td>
+      <td align="left" width="152px"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="d20" name="d20" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="e20" name="e20" ></textarea></td>
+    </tr>
+    <tr style="padding:0" align="center" >
+      <td >21</td>
+      <td align="left" style="padding:5px" width="152px">FAC Assembling</td>
+      <td align="left" style="padding:5px"><input type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger" id="tog21" name="tog21"></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="a21" name="a21" ></textarea></td>
+      <td align="left"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="b21" name="b21" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="c21" name="c21" ></textarea></td>
+      <td align="left" width="152px"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="d21" name="d21" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="e21" name="e21" ></textarea></td>
+    </tr>
+    <tr style="padding:0" align="center">
+      <td >22</td>
+      <td align="left" style="padding:5px" width="152px">ONT Placing</td>
+      <td align="left" style="padding:5px"><input type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger" id="tog22" name="tog22"></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="a22" name="a22" ></textarea></td>
+      <td align="left"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="b22" name="b22" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="c22" name="c22" ></textarea></td>
+      <td align="left" width="152px"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="d22" name="d22" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="e22" name="e22" ></textarea></td>
+    </tr>
+    <tr style="padding:0" align="center">
+      <td>23</td>
+      <td align="left" style="padding:5px" width="152px">Power Testing</td>
+      <td align="left" style="padding:5px"><input type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger" id="tog23" name="tog23"></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="a23" name="a23" ></textarea></td>
+      <td align="left"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="b23" name="b23" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="c23" name="c23" ></textarea></td>
+      <td align="left" width="152px"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="d23" name="d23" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="e23" name="e23" ></textarea></td>
+    </tr>
+    <tr style="padding:0" align="center">
+      <td>24</td>
+      <td align="left" style="padding:5px" width="152px">ONT Configuration</td>
+      <td align="left" style="padding:5px"><input type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger" id="tog24" name="tog24"></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="a24" name="a24" ></textarea></td>
+      <td align="left"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="b24" name="b24" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="c24" name="c24" ></textarea></td>
+      <td align="left" width="152px"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="d24" name="d24" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="e24" name="e24" ></textarea></td>
+    </tr>
+    <tr style="padding:0" align="center">
+      <td >Safty</td>
+      <td>25</td>
+      <td align="left" style="padding:5px" width="152px">Adhering safe work practices</td>
+      <td align="left" style="padding:5px"><input type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger" id="tog25" name="tog25"></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="a25" name="a25" ></textarea></td>
+      <td align="left"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="b25" name="b25" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="c25" name="c25" ></textarea></td>
+      <td align="left" width="152px"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="d25" name="d25" ></textarea></td>
+      <td align="left" ><textarea class="form-control" rows="2" style="width:100%; height:100%" id="e25" name="e25" ></textarea></td>
+    </tr>
+  </table>
+  <br/>
+  <table style="color:#40576F; ">
+    <tr >
+      <td rowspan=3 >BB</td>
+      <td >Internet speed (wired):</td>
+      <td style="padding-right:55px;"><input type="text" name="bbspeed" class="inputx"  id="bbspeed"     /></td>
+      <td >Opt.Pwr Level at FDP(dBm):</td>
+       <td style="padding-right:55px;"><input type="text" name="pwr" class="inputx"  id="pwr"     /></td>
+    </tr>
+    <tr >
+      <td >Internet speed (Wi-Fi):</td>
+       <td style="padding-right:55px;"><input type="text" name="to" class="inputx"  id="wifispeed"     /></td>
+      <td  >Opt.Pwr Level at Rossete(dBm):</td>
+       <td style="padding-right:55px;"><input type="text" name="wifipowr" class="inputx"  id="wifipowr"     /></td>
+    </tr>
+    <tr >
+      <td >Selected Wi-Fi Channel No:</td>
+       <td style="padding-right:55px;"><input type="text" name="chanelno" class="inputx"  id="chanelno"     /></td>
+      <td  >Loss btwn FDP &amp; Rossete(dBm):</td>
+      <td style="padding-right:55px;"><input type="text" name="loss" class="inputx"  id="loss"     /></td>
+    </tr>
+    <tr >
+      <td  >Peo TV</td>
+      <td >IP Address:</td>
+       <td style="padding-right:55px;"><input type="text" name="ip" class="inputx"  id="ip"     /></td>
+      <td  >Opt.Pwr Level at ONT(dBm):</td>
+       <td style="padding-right:55px;"><input type="text" name="iptvpwr" class="inputx"  id="iptvpwr"     /></td>
+    </tr>
+    <tr >
+      <td >Other Services</td>
+      <td >&nbsp;</td>
+      <td >&nbsp;</td>
+      <td >ONT Type/Model:</td>
+       <td style="padding-right:55px;"><input type="text" name="onttype" class="inputx"  id="onttype"     /></td>
+    </tr>
+    </table>
+    <br/>
+    <table style="color:#40576F; ">
+    <tr >
+      <td colspan="5" align="center">Overall Customer Satisfaction (Excellent / Good/ Average/Bad)</td>
+    </tr>
+    <tr >
+      <td >OH Construction</td>
+      <td colspan="4" style="padding:5px"><div class="btn-group" data-toggle="buttons" id="tog1">
+  <label class="btn btn-secondary btn-lg">
+    <input type="radio" name="options" id="Excellent" value="Excellent" autocomplete="off"  > Excellent
+  </label>
+  <label class="btn btn-secondary btn-lg">
+    <input type="radio" name="options" id="Good" value="Good" autocomplete="off"> Good
+  </label>
+  <label class="btn btn-secondary btn-lg">
+    <input type="radio" name="options" id="Average" value="Average" autocomplete="off"> Average
+  </label>
+  <label class="btn btn-secondary btn-lg">
+    <input type="radio" name="options" id="Bad" value="Bad" autocomplete="off"> Bad
+  </label>
+</div></td>
+       </tr>
+    <tr >
+      <td >Workmanship of Construction Teams</td>
+       <td colspan="4" style="padding:5px"><div class="btn-group" data-toggle="buttons" id="tog2">
+  <label class="btn btn-secondary btn-lg">
+    <input type="radio" name="options1" id="options1" value="Excellent" autocomplete="off" > Excellent
+  </label>
+  <label class="btn btn-secondary btn-lg">
+    <input type="radio" name="options1" id="options1" value="Good" autocomplete="off"> Good
+  </label>
+  <label class="btn btn-secondary btn-lg">
+    <input type="radio" name="options1" id="options1" value="Average" autocomplete="off"> Average
+  </label>
+  <label class="btn btn-secondary btn-lg">
+    <input type="radio" name="options1" id="options1" value="Bad" autocomplete="off"> Bad
+  </label>
+</div></td>
+       </tr>
+    <tr  >
+      <td >SLT After Sale Service</td>
+       <td colspan="4" style="padding:5px"><div class="btn-group" data-toggle="buttons" id="tog3">
+  <label class="btn btn-secondary btn-lg">
+    <input type="radio" name="options2" value="Excellent" autocomplete="off" > Excellent
+  </label>
+  <label class="btn btn-secondary btn-lg">
+    <input type="radio" name="options2" value="Good" autocomplete="off"> Good
+  </label>
+  <label class="btn btn-secondary btn-lg">
+    <input type="radio" name="options2" value="Average" autocomplete="off"> Average
+  </label>
+  <label class="btn btn-secondary btn-lg">
+    <input type="radio" name="options2" value="Bad" autocomplete="off"> Bad
+  </label>
+</div></td>
+    </tr>
+	<tr>
+      <td colspan="2">Overall Quality</td>
+      <td colspan="3"><input type="checkbox" checked data-toggle="toggle" data-on="PASS" data-off="FAIL" data-onstyle="success" data-offstyle="danger" id="toglast" name="toglast"></td>
+    </tr>
+    <tr>
+      <td colspan="2">Any suggestions by the inspectors</td>
+      <td colspan="3"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="xx1" name="xx1"></textarea></td>
+    </tr>
+    <tr >
+      <td colspan="2">Any difficulties faced by the inspectors</td>
+      <td colspan="3"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="xx2" name="xx2"></textarea></td>
+    </tr>
+
+    <tr >
+      <td colspan="2">Signature of the supervisor</td>
+      <td colspan="3"><textarea class="form-control" rows="2" style="width:100%; height:100%" id="xx2" name="xx3"></textarea></td>
+    </tr>
+    
+  </table>
+  
+   <input type="submit" value="Submit">
+</form>
+</div>
+
+ </div>
+        <div role="tabpanel" class="tab-pane fade" id="bb" aria-labelledby="bb-tab">
+		
+		<div align="center"; style="background-color:#40576F">
+  <h2 style="color:#F0F3F4  ; font-weight:bolder">FTTH NC Quality Check Summary</h2>
+  <h4 style="color:#F0F3F4  ;"></h4>
+  <h5 style="color:#F0F3F4  ;"></h5>
+</div>
+         
+<div align="center"; >
+  <table>
+    <tr style="padding:0" >
+      <td rowspan="2"><h2 style="color:#2E86C1; font-weight:bolder"><small style="color:#3498DB;" id="regionx">REGION </small></h2></td>
+      <td  rowspan="2" style="padding:1em"><select id="region" onChange="loadvalues('region')">
+          <option value=""></option>
+          <option value="ALL">ALL</option>
+          <option value="Metro">Metro</option>
+          <option value="Region I">Region I</option>
+          <option value="Region II">Region II</option>
+          <option value="Region III">Region III</option>
+          <option value="HQ">HQ</option>
+        </select></td>
+      <td rowspan="2"><h2 style="color:#2E86C1; font-weight:bolder; visibility:hidden"><small style="color:#3498DB;" id="provincex" >PROVINCE </small></h2></td>
+      <td rowspan="2" style="padding:1em" ><select id="province" style="visibility:hidden" onChange="loadvalues('province')">
+          <option value=""></option>
+        </select></td>
+      <td><h2 style="color:#2E86C1; font-weight:bolder; visibility:hidden"><small style="color:#3498DB; " id="rtomx" >RTOM </small></h2></td>
+      <td style="padding:1em"><select id="rtom" style="visibility:hidden" onChange="loadvalues('rtom')">
+          <option value=""></option>
+        </select></td>
+      <td rowspan="2"><h2 style="color:#2E86C1; font-weight:bolder; visibility:hidden"><small style="color:#3498DB; "id="leax" >LEA </small></h2></td>
+      <td rowspan="2" style="padding:1em"><select id="lea" style="visibility:hidden" onChange="loadvalues('lea')">
+          <option value=""></option>
+        </select></td>
+      
+    </tr>
+    <tr>
+      <td><h2 style="color:#2E86C1; font-weight:bolder; visibility:hidden"><small style="color:#3498DB; " id="opmcx" >OPMC </small></h2></td>
+      <td style="padding:1em"><select id="opmc" style="visibility:hidden" onChange="loadvalues('opmc')">
+          <option value=""></option>
+        </select></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td><h2 style="color:#2E86C1; font-weight:bolder"><small style="color:#3498DB; " id="opmcx" >From </small></h2><td><input type="text" name="from" class="form-control"  id="inputField1x"     />
+      </td>
+      <td><h2 style="color:#2E86C1; font-weight:bolder"><small style="color:#3498DB; " id="opmcx" >To </small></h2><td><input type="text" name="to" class="form-control"  id="inputField3"     />
+      </td>
+      <td  colspan="2"><button type="button" class="btn btn-success" onClick="gettable()">Get Details</button></td>
+    </tr>
+  </table>
+  <div class="container">
+  <div class="row justify-content-start">
+    <div class="col-4"><br/>  </div><div class="col-4">
+  <div id= "table1" > <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> </div>
+  </div><div class="col-4"><br/> </div></div></div>
+
+  <br/>
+        </div>
+		 
+		
+      </div>
+	  
+	  <div role="tabpanel" class="tab-pane fade" id="Peotv" aria-labelledby="Peotv-tab">
+         
+       
+		<div align="center"; style="background-color:#40576F">
+  <h2 style="color:#F0F3F4  ; font-weight:bolder">FTTH NC Quality Check Report</h2>
+  <h4 style="color:#F0F3F4  ;"></h4>
+  <h5 style="color:#F0F3F4  ;"></h5>
+</div>
+<div align="center"; >
+<table ><tr>
+ <td><h2 style="color:#2E86C1; font-weight:bolder"><small style="color:#3498DB; " id="opmcx" >From </small></h2><td><input type="text" name="from" class="form-control"  id="inputField1a"     />
+      </td>
+      <td><h2 style="color:#2E86C1; font-weight:bolder"><small style="color:#3498DB; " id="opmcx" >To </small></h2><td><input type="text" name="to" class="form-control"  id="inputField2a"     />
+      </td>
+      <td  colspan="2"><button type="button" class="btn btn-success" onClick="getalldata()">Get Details</button></td>
+	 
+    </tr>
+  </table>
+   
+	  <div = id="table2"  style="visibility: hidden"> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> </div>
+</div>
+</div>
+  </div>
+  
+        </div>
+    </div>
+
+<iframe id="txtArea1" style="display:none"></iframe>
+</div>
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog"> 
+      
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" id="mtitle"></h4>
+		  <h4 class="modal-title1" id="mtitle1"></h4>
+        </div>
+        <div class="modal-body" id="summary">
+         
+         
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
